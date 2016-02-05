@@ -1,0 +1,2 @@
+    $ ./erandomd erandom &
+    $ cat erandom
