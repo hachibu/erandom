@@ -1,5 +1,4 @@
-
 ![Image](example.png)
 
-    $ ./erandomd erandom &
+    $ ./erandomd.hs &
     $ cat erandom
