@@ -10,17 +10,19 @@ data Options = Options
   }
   deriving Show
 
-optParser :: ParserInfo Options
-optParser = info (helper <*> os)
-  (fullDesc <> progDesc "erandom -e data/emojis.txt")
+optionsParser :: ParserInfo Options
+optionsParser = info (helper <*> options) fullDesc
   where
-    os = Options
-      <$> strOption (long "emojis" <> short 'e')
-      <*> strOption (long "output" <> short 'o' <> value "")
+    options = Options
+      <$> argument str (metavar "path/to/emojis.txt")
+      <*> strOption ( long "output"
+                   <> short 'o'
+                   <> value ""
+                   <> help "Set output file" )
 
 main :: IO [()]
 main = do
-  options      <- execParser optParser
+  options      <- execParser optionsParser
   randomEmojis <- fmap lines (readFile $ optionEmojis options) >>= randomChoice
 
   let output = optionOutput options 
