@@ -1,9 +1,12 @@
+{-# LANGUAGE NoImplicitPrelude #-}
+
+import BasicPrelude
 import Erandom.Core
 import Options.Applicative
 
 data Options = Options
-  { _emojis :: String
-  , _output :: String 
+  { optionEmojis :: FilePath
+  , optionOutput :: FilePath 
   }
   deriving Show
 
@@ -18,9 +21,9 @@ optParser = info (helper <*> os)
 main :: IO [()]
 main = do
   options      <- execParser optParser
-  randomEmojis <- fmap lines (readFile $ _emojis options) >>= randomChoice
+  randomEmojis <- fmap lines (readFile $ optionEmojis options) >>= randomChoice
 
-  let output = _output options 
+  let output = optionOutput options 
 
   mapM (if null output then putStr
                        else appendFile output) randomEmojis
