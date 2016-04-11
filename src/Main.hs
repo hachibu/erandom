@@ -1,4 +1,4 @@
-{-# LANGUAGE NoImplicitPrelude #-}
+module Main where
 
 import BasicPrelude
 import Erandom.Core
@@ -23,9 +23,9 @@ optionsParser = info (helper <*> options) fullDesc
 main :: IO [()]
 main = do
   options      <- execParser optionsParser
-  randomEmojis <- fmap lines (readFile $ optionEmojis options) >>= randomChoice
+  randomEmojis <- map lines (readFile $ optionEmojis options) >>= randomChoice
 
-  let output = optionOutput options 
+  let output = optionOutput options
 
   mapM (if null output then putStr
                        else appendFile output) randomEmojis
