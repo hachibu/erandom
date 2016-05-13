@@ -5,8 +5,9 @@ import Erandom.Core
 import Options.Applicative
 
 data Options = Options
-  { optionEmojis :: FilePath
-  , optionOutput :: FilePath 
+  { optionEmojis   :: FilePath
+  , optionOutput   :: FilePath
+  , optionNumChars :: Maybe Int
   }
   deriving Show
 
@@ -19,6 +20,10 @@ optionsParser = info (helper <*> options) fullDesc
                    <> short 'o'
                    <> value ""
                    <> help "Set output file" )
+      <*> optional (
+          option auto ( long "num"
+                     <> short 'n'
+                     <> help "Number of output characters" ))
 
 main :: IO [()]
 main = do
@@ -28,4 +33,5 @@ main = do
   let output = optionOutput options
 
   mapM (if null output then putStr
-                       else appendFile output) randomEmojis
+                       else appendFile output)
+       (maybe id take (optionNumChars options) randomEmojis)
