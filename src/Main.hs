@@ -1,8 +1,8 @@
 module Main where
 
 import BasicPrelude
-import Erandom.Core
 import Options.Applicative
+import System.Random
 
 data Options = Options
   { optionEmojis   :: FilePath
@@ -24,6 +24,12 @@ optionsParser = info (helper <*> options) fullDesc
           option auto ( long "num"
                      <> short 'n'
                      <> help "Number of output characters" ))
+
+randomChoice :: [a] -> IO [a]
+randomChoice xs = map (xs !!) <$> randomInts (0, length xs - 1)
+
+randomInts :: (Int, Int) -> IO [Int]
+randomInts (n, m) = fmap (randomRs (n, m)) newStdGen
 
 main :: IO [()]
 main = do

@@ -1,7 +1,5 @@
 ![Image](example.png)
 
-    $ cabal sandbox init
-    $ cabal install -j4 --only-dependencies
-    $ cabal build
-    $ cabal run -- data/emojis.txt -o erandom &
+    $ stack build
+    $ stack exec -- erandom data/emojis.txt -o erandom &
     $ cat erandom
