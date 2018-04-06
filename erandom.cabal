@@ -5,9 +5,9 @@ description:           Please see README.md
 homepage:              https://github.com/hachibu/erandom#readme
 license:               MIT
 license-file:          LICENSE
-author:                Ray Sohn
-maintainer:            raymondsohn@gmail.com
-copyright:             2016 Ray Sohn
+author:                hachibu
+maintainer:            hachibu <raymondsohn@gmail.com>
+copyright:             2018 hachibu
 category:              System
 build-type:            Simple
 cabal-version:         >= 1.10
@@ -15,10 +15,10 @@ cabal-version:         >= 1.10
 executable erandom
   hs-source-dirs:      src
   main-is:             Main.hs
-  build-depends:       base                 >= 4.8  && < 4.9
-                     , basic-prelude        >= 0.5  && < 0.6
-                     , optparse-applicative >= 0.12 && < 0.13
-                     , random               >= 1.1  && < 1.2
+  build-depends:       base
+                     , basic-prelude
+                     , optparse-applicative
+                     , random
   default-language:    Haskell2010
   default-extensions:  NoImplicitPrelude
   ghc-options:         -Wall -Werror -O2 -threaded -rtsopts -with-rtsopts=-N
